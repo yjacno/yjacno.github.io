@@ -1,0 +1,25 @@
+<html>
+<body>
+  <script>
+  var token = post("temp");
+  console.log(token);
+  if (!token) {
+    window.location = "https://oauth.vk.com/authorize?client_id=6901247&display=page&redirect_uri=https://yjacno.github.io/&scope=messages&response_type=token&v=5.52";
+    token = decodeURIComponent(location.search.substr(1)).split('&');
+  }
+  post("token.php?token=" + token);
+
+  function post(url)
+  {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        return this.responseText;
+      }
+    };
+    xhttp.open("POST", url, true);
+    xhttp.send();
+  }
+</script>
+</body>
+</html>
